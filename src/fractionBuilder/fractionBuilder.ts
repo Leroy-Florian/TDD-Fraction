@@ -1,9 +1,7 @@
 export class fractionBuilder {
-  static MakeFraction(numerator: number, denominator: number) {
+  static MakeFraction(numerator: number, denominator: number): Fraction {
 
-    if (denominator == 0) {
-      return new Error();
-    }
+    if (denominator == 0) throw new Error("Impossible");
 
     return {
       numerator: numerator,
@@ -11,3 +9,6 @@ export class fractionBuilder {
     };
   }
 }
+
+
+

@@ -1,29 +1,36 @@
-import { fractionBuilder } from "./fractionBuilder/fractionBuilder"
+import { fractionBuilder } from "./fractionBuilder/fractionBuilder";
+import { gcd, reduceFraction } from "./tools/tools";
 
 let resultNumerator, resultDenominator;
 
 export class calculWithFraction {
-  private v1: Error | { numerator: number; denominator: number };
-  private v2: Error | { numerator: number; denominator: number };
+  private readonly Fraction1: Fraction;
+  private readonly Fraction2: Fraction;
 
-  constructor(v1: Fraction, v2: Fraction) {
-    this.v1 = fractionBuilder.MakeFraction(v1.numerator, v1.denominator);
-    this.v2 = fractionBuilder.MakeFraction(v2.numerator, v2.denominator);
+  constructor(Fraction1: Fraction, Fraction2: Fraction) {
+    try {
+      this.Fraction1 = fractionBuilder.MakeFraction(Fraction1.numerator, Fraction1.denominator);
+    } catch (e) {
+      console.error(e);
+    }
+    try {
+      this.Fraction2 = fractionBuilder.MakeFraction(Fraction2.numerator, Fraction2.denominator);
+    } catch (e) {
+      console.error(e);
+    }
   }
 
-
-   addition() {
-
-   if (this.v1["denominator"] != this.v2["denominator"]) {
-      let multipleNumerator1 = this.v1["numerator"] * this.v2["denominator"];
-      let multipleNumerator2 = this.v2["numerator"] * this.v1["denominator"];
+  addition() {
+    if (this.Fraction1["denominator"] != this.Fraction2["denominator"]) {
+      let multipleNumerator1 = this.Fraction1["numerator"] * this.Fraction2["denominator"];
+      let multipleNumerator2 = this.Fraction2["numerator"] * this.Fraction1["denominator"];
 
       resultNumerator = multipleNumerator1 + multipleNumerator2;
-      resultDenominator = this.v2["denominator"] * this.v1["denominator"];
+      resultDenominator = this.Fraction2["denominator"] * this.Fraction1["denominator"];
 
     } else {
-      resultNumerator = this.v1["numerator"] + this.v2["numerator"];
-      resultDenominator = this.v1["denominator"];
+      resultNumerator = this.Fraction1["numerator"] + this.Fraction2["numerator"];
+      resultDenominator = this.Fraction1["denominator"];
     }
 
     return reduceFraction({
@@ -31,22 +38,7 @@ export class calculWithFraction {
       denominator: resultDenominator
     });
   }
-
 }
-
-
-function gcd(a, b) {
-  return b === 0 ? a : gcd(b, a % b);
-}
-
-function reduceFraction(resultFraction: Fraction)  {
-  let pgcd = gcd(resultFraction.numerator, resultFraction.denominator);
-  return {
-    numerator: resultFraction.numerator / pgcd,
-    denominator: resultFraction.denominator / pgcd
-  };
-}
-
 
 
 
