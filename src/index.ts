@@ -1,34 +1,29 @@
-export class fractionBuilder {
-  static MakeFraction(numerator: number, denominator: number) {
-
-    if (denominator == 0) {
-      return new Error("impossible");
-    }
-
-    return {
-      numerator: numerator,
-      denominator: denominator
-    };
-  }
-}
+import { fractionBuilder } from "./fractionBuilder/fractionBuilder"
 
 let resultNumerator, resultDenominator;
 
 export class calculWithFraction {
-  v1 = fractionBuilder.MakeFraction(1, 2);
-  v2 = fractionBuilder.MakeFraction(1, 5);
+  private v1: Error | { numerator: number; denominator: number };
+  private v2: Error | { numerator: number; denominator: number };
 
-  static addition(fraction1: Fraction, fraction2: Fraction) {
-    if (fraction1.denominator != fraction2.denominator) {
-      let multipleNumerator1 = fraction1.numerator * fraction2.denominator;
-      let multipleNumerator2 = fraction2.numerator * fraction1.denominator;
+  constructor(v1: Fraction, v2: Fraction) {
+    this.v1 = fractionBuilder.MakeFraction(v1.numerator, v1.denominator);
+    this.v2 = fractionBuilder.MakeFraction(v2.numerator, v2.denominator);
+  }
+
+
+   addition() {
+
+   if (this.v1["denominator"] != this.v2["denominator"]) {
+      let multipleNumerator1 = this.v1["numerator"] * this.v2["denominator"];
+      let multipleNumerator2 = this.v2["numerator"] * this.v1["denominator"];
 
       resultNumerator = multipleNumerator1 + multipleNumerator2;
-      resultDenominator = fraction2.denominator * fraction1.denominator;
+      resultDenominator = this.v2["denominator"] * this.v1["denominator"];
 
     } else {
-      resultNumerator = fraction1.numerator + fraction2.numerator;
-      resultDenominator = fraction1.denominator;
+      resultNumerator = this.v1["numerator"] + this.v2["numerator"];
+      resultDenominator = this.v1["denominator"];
     }
 
     return reduceFraction({
@@ -37,10 +32,8 @@ export class calculWithFraction {
     });
   }
 
-  multiplication(fraction1: Fraction, fraction2: Fraction) {
-
-  }
 }
+
 
 function gcd(a, b) {
   return b === 0 ? a : gcd(b, a % b);
