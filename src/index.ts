@@ -18,12 +18,6 @@ export class calculWithFraction {
   v1 = fractionBuilder.MakeFraction(1, 2);
   v2 = fractionBuilder.MakeFraction(1, 5);
 
-
-  constructor(v1: Fraction, v2: Fraction) {
-    this.v1 = v1;
-    this.v2 = v2;
-  }
-
   static addition(fraction1: Fraction, fraction2: Fraction) {
     if (fraction1.denominator != fraction2.denominator) {
       let multipleNumerator1 = fraction1.numerator * fraction2.denominator;

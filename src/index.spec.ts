@@ -30,3 +30,11 @@ describe("Different Denominator", function() {
   });
 });
 
+describe("Different Denominator", function() {
+  it("should return a string 4/4", function() {
+    expect(calculWithFraction.addition({ numerator: 1, denominator: 2 }, {
+      numerator: 2,
+      denominator: 4
+    })).toEqual({ numerator: 1, denominator: 1 });
+  });
+});
